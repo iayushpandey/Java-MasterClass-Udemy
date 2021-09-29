@@ -1,104 +1,77 @@
-package academy.learnprogramming;
-
-class Movie {
-    private String name;
-
-    public Movie(String name) {
-        this.name = name;
-    }
-
-    public String plot() {
-        return "No plot here";
-    }
-
-    public String getName() {
-        return name;
-    }
-}
-
-class Jaws extends Movie {
-    public Jaws() {
-        super("Jaws");
-    }
-
-    public String plot() {
-        return "A shark eats lots of people";
-    }
-}
-
-class IndependenceDay extends Movie {
-    public IndependenceDay() {
-        super("Independence Day");
-    }
-
-    @Override
-    public String plot() {
-        return "Aliens attempt to take over planet earth";
-    }
-}
-
-class MazeRunner extends Movie {
-
-    public MazeRunner() {
-        super("Maze Runner");
-    }
-
-    @Override
-    public String plot() {
-        return "Kids try to escape a maze.";
-    }
-}
-
-class StarWars extends Movie {
-    public StarWars() {
-        super("Star Wars");
-    }
-
-    @Override
-    public String plot() {
-        return "Imperial forces try to take over the universe";
-    }
-}
-
-class Forgettable extends Movie {
-    public Forgettable() {
-        super("Forgetable");
-    }
-
-    // No plot method
-}
+package com.timbuchalka;
 
 public class Main {
 
     public static void main(String[] args) {
-	    for (int i=1; i<11; i++) {
-	        Movie movie = randomMovie();
-            System.out.println("Movie #" + i +
-                    " : " + movie.getName() + "\n" +
-                    "Plot: " + movie.plot() + "\n");
-        }
-    }
+		// The purpose of the application is to help a ficticious company called Bills Burgers to manage
+		// their process of selling hamburgers.
+		// Our application will help Bill to select types of burgers, some of the additional items (additions) to
+		// be added to the burgers and pricing.
+		// We want to create a base hamburger, but also two other types of hamburgers that are popular ones in
+		// Bills store.
+		// The basic hamburger should have the following items.
+		// bread roll type, meat and up to 4 additional additions (things like lettuce, tomato, carrot, etc) that
+		// the customer can select to be added to the burger.
+		// Each one of these items gets charged an additional
+		// price so you need some way to track how many items got added and to calculate the final price (base
+		// burger with all the additions).
+		// This burger has a base price and the additions are all seperately priced (up to 4 additions, see above).
+		// Create a Hamburger class to deal with all the above.
+		// The constructor should only include the roll type, meat and price, can also include name of burger or you can use setter.
+		// Also create two extra varieties of Hamburgers (subclasses) to cater for
+		// a) Healthy burger (on a brown rye bread roll), plus two addition items can be added.
+		// The healthy burger can have 6 items (Additions) in total.
+		// hint:  you probably want to process the 2 additional items in this new class (subclass of Hamburger), not the base class (Hamburger),
+		// since the 2 additions are only appropriate for this new class (in other words new burger type).
+		// b) Deluxe hamburger - comes with chips and drinks as additions, but no extra additions are allowed.
+		// hint:  You have to find a way to automatically add these new additions at the time the deluxe burger
+		// object is created, and then prevent other additions being made.
+		//  All 3 classes should have a method that can be called anytime to show the base price of the hamburger
+		// plus all additionals, each showing the addition name, and addition price, and a grand/final total for the
+		// burger (base price + all additions)
+		// For the two additional classes this may require you to be looking at the base class for pricing and then
+		// adding totals to final price.
 
-    public static Movie randomMovie() {
-        int randomNumber = (int) (Math.random() * 5) + 1;
-        System.out.println("Random number generator was: " + randomNumber);
-        switch (randomNumber) {
-            case 1:
-                return new Jaws();
+        Hamburger hamburger = new Hamburger("Basic", "Sausage", 3.56, "White");
+        double price = hamburger.itemizeHamburger();
+        hamburger.addHamburgerAddition1("Tomato", 0.27);
+        hamburger.addHamburgerAddition2("Lettuce", 0.75);
+        hamburger.addHamburgerAddition3("Cheese", 1.13);
+        System.out.println("Total Burger price is " + hamburger.itemizeHamburger());
 
-            case 2:
-                return new IndependenceDay();
+        HealthyBurger healthyBurger = new HealthyBurger("Bacon", 5.67);
+        healthyBurger.addHamburgerAddition1("Egg", 5.43);
+        healthyBurger.addHealthAddition1("Lentils", 3.41);
+        System.out.println("Total Healthy Burger price is  " + healthyBurger.itemizeHamburger());
 
-            case 3:
-                return new MazeRunner();
+        DeluxeBurger db = new DeluxeBurger();
+        db.addHamburgerAddition3("Should not do this", 50.53);
+        db.itemizeHamburger();
 
-            case 4:
-                return new StarWars();
 
-            case 5:
-                return new Forgettable();
-        }
 
-        return null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
